@@ -19,7 +19,7 @@ defmodule EnneagramWebWeb.TestLive do
      |> assign(:can_skip, false)}
   end
 
-  def handle_event("answer", %{"value" => value}, socket) do
+  def handle_event("answer", %{"answer" => value}, socket) do
     answer_value = String.to_integer(value)
     current_question = Enum.at(socket.assigns.questions, socket.assigns.current_index)
 
