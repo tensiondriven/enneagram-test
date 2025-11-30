@@ -1,0 +1,71 @@
+id,question,t1_weight,t2_weight,t3_weight,t4_weight,t5_weight,t6_weight,t7_weight,t8_weight,t9_weight,category
+1,I have a strong inner critic that tells me how I should improve,3,0,0,1,0,0,-1,0,0,gut
+2,I often put others' needs before my own,0,3,0,0,-1,0,0,-1,1,heart
+3,I am very aware of how others perceive me,0,1,3,1,0,1,0,0,0,heart
+4,I often feel like I'm missing something that others have,0,0,0,3,1,0,0,0,0,heart
+5,I need a lot of alone time to recharge,0,-1,-1,1,3,0,0,0,0,head
+6,I tend to prepare for worst-case scenarios,1,0,0,0,0,3,-2,0,0,head
+7,I love having many options and possibilities open to me,0,0,0,0,0,-1,3,0,-1,head
+8,I'm not afraid to confront people when necessary,-1,-1,0,0,0,0,0,3,-2,gut
+9,I tend to avoid conflict and keep the peace,-1,1,-1,0,0,0,0,-2,3,gut
+10,I have high standards for myself and others,3,0,1,0,0,0,-1,1,0,gut
+11,I feel guilty when I say no to people,0,3,0,0,0,1,0,0,1,heart
+12,Success and accomplishment are very important to me,1,0,3,0,0,0,1,2,0,heart
+13,I'm often envious of what others have,0,0,1,3,0,0,0,0,0,heart
+14,I prefer to observe before jumping in,0,0,-1,1,3,1,-2,0,0,head
+15,I seek security and certainty in my life,1,0,0,0,0,3,-2,0,1,head
+16,I get bored easily and always want something new,0,0,0,0,-1,-1,3,0,-1,head
+17,I take charge in difficult situations,1,0,1,0,0,0,0,3,-1,gut
+18,I tend to merge with others' plans and preferences,-1,1,-1,0,0,0,0,-1,3,gut
+19,It's important to do things the right way,3,1,1,0,0,0,0,0,0,gut
+20,I need to be needed by others,0,3,0,0,-1,0,0,0,0,heart
+21,I'm very good at adapting to what's expected of me,0,1,3,0,0,1,1,0,1,heart
+22,I'm very in touch with my emotions,0,1,0,3,0,0,0,0,0,heart
+23,I compartmentalize my feelings to think clearly,0,-1,1,0,3,0,0,1,0,head
+24,I'm very loyal to people and causes I believe in,0,1,0,0,0,3,0,0,1,head
+25,I tend to keep things light and positive,-1,1,1,0,0,-1,3,0,1,head
+26,I protect myself from being vulnerable,0,0,1,0,1,0,0,3,0,gut
+27,I often lose myself in others' agendas,0,2,0,0,0,0,0,0,3,gut
+28,I have a clear sense of right and wrong,3,0,0,0,0,1,0,1,0,gut
+29,I give a lot to make people like me,0,3,1,0,0,0,0,0,0,heart
+30,I'm competitive and driven to be the best,0,0,3,0,0,0,1,2,0,heart
+31,I feel deeply different from most people,0,0,0,3,1,0,0,0,0,heart
+32,I hoard my time and energy,0,-1,0,1,3,0,0,0,0,head
+33,I look to authorities and experts for guidance,0,0,0,0,0,3,0,-1,0,head
+34,I avoid painful or negative experiences,-1,0,0,-1,0,-1,3,0,0,head
+35,I'm direct and straightforward in my communication,1,0,0,0,0,0,0,3,0,gut
+36,I see many perspectives and can understand all sides,-1,0,0,0,0,0,0,-1,3,gut
+37,I'm very detail-oriented and thorough,3,0,1,0,1,1,0,0,0,gut
+38,I can sense what others are feeling,0,3,1,2,0,1,0,0,1,heart
+39,I work hard to maintain my image and reputation,0,1,3,1,0,0,0,0,0,heart
+40,I create beauty and meaning in my life,0,0,0,3,0,0,0,0,0,heart
+41,I research extensively before making decisions,1,0,0,0,3,2,0,0,0,head
+42,I question whether people are trustworthy,0,0,0,0,0,3,0,1,0,head
+43,I'm an optimist and see the bright side,0,1,1,0,0,-1,3,0,0,head
+44,I'm tough and can handle difficult situations,1,0,1,0,0,0,0,3,0,gut
+45,I struggle to prioritize my own needs,0,1,0,0,0,0,0,0,3,gut
+46,I can be very critical and judgmental,3,0,0,0,0,0,0,1,0,gut
+47,I sometimes manipulate to get what I need,0,3,2,0,0,0,0,1,0,heart
+48,Efficiency and productivity are priorities for me,1,0,3,0,0,0,0,1,0,heart
+49,I'm drawn to things that are unique or authentic,0,0,0,3,1,0,1,0,0,heart
+50,I detach emotionally to analyze situations,0,0,1,0,3,1,0,0,0,head
+51,I'm anxious and worry a lot,0,0,0,0,0,3,-1,0,0,head
+52,I love adventure and trying new things,0,0,0,0,0,-1,3,1,-1,head
+53,I'm protective of people I care about,0,1,0,0,0,0,0,3,0,gut
+54,I numb out or check out when stressed,0,0,0,0,0,0,1,0,3,gut
+55,I get frustrated when things aren't done correctly,3,0,1,0,0,0,0,1,0,gut
+56,I pride myself on being helpful and supportive,0,3,0,0,0,1,0,0,1,heart
+57,I'm very goal-oriented and results-focused,1,0,3,0,0,0,0,2,0,heart
+58,I can be moody and dramatic,0,0,0,3,0,0,0,0,0,heart
+59,I need to understand how things work,1,0,0,0,3,1,0,0,0,head
+60,I test people to see if they're really there for me,0,0,0,1,0,3,0,1,0,head
+61,I don't like to be limited or restricted,0,0,0,0,0,-1,3,2,-1,head
+62,I value strength and don't respect weakness,0,0,1,0,0,0,0,3,-1,gut
+63,I go along to get along,0,1,0,0,0,0,0,-1,3,gut
+64,I have a strong sense of personal integrity,3,0,0,1,0,0,0,0,0,gut
+65,I can be prideful about not needing help,0,3,1,0,1,0,0,2,0,heart
+66,I struggle to access my true feelings,0,0,2,0,1,0,1,0,1,heart
+67,I've been told I'm too sensitive or intense,0,0,0,3,0,0,0,0,0,heart
+68,I'm very private and guard my personal space,0,0,0,1,3,0,0,1,0,head
+69,I can be indecisive and second-guess myself,0,0,0,0,0,3,0,0,1,head
+70,I reframe negative situations into positive ones,-1,1,1,0,0,-1,3,0,0,head

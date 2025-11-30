@@ -1,0 +1,26 @@
+# Elixir build artifacts
+/_build
+/deps
+*.ez
+
+# Docs
+/doc
+*.html
+
+# Tests
+/test
+/cover
+
+# Development
+.elixir_ls/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Git
+.git
+.gitignore
+
+# Misc
+.DS_Store

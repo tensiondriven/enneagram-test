@@ -1,0 +1,102 @@
+<div class="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 py-12 px-4">
+  <div class="max-w-4xl mx-auto">
+    <%!-- Header --%>
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Your Results</h1>
+      <p class="text-gray-600">Completed with <%= @test.confidence %>% confidence</p>
+    </div>
+
+    <%!-- Primary Type Card --%>
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+      <div class="text-center mb-6">
+        <div class="inline-block bg-indigo-100 rounded-full px-6 py-2 mb-4">
+          <span class="text-indigo-600 font-bold text-lg">Type <%= @test.primary_type %></span>
+        </div>
+        <h2 class="text-3xl font-bold text-gray-900 mb-2"><%= @primary_type_desc.name %></h2>
+        <p class="text-xl text-gray-600"><%= @primary_type_desc.title %></p>
+      </div>
+
+      <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+        <%= @primary_type_desc.description %>
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-50 rounded-lg p-4">
+          <h3 class="font-semibold text-red-800 mb-2">Core Fear</h3>
+          <p class="text-red-700 text-sm"><%= @primary_type_desc.core_fear %></p>
+        </div>
+
+        <div class="bg-green-50 rounded-lg p-4">
+          <h3 class="font-semibold text-green-800 mb-2">Core Desire</h3>
+          <p class="text-green-700 text-sm"><%= @primary_type_desc.core_desire %></p>
+        </div>
+      </div>
+
+      <div class="bg-indigo-50 rounded-lg p-4">
+        <h3 class="font-semibold text-indigo-800 mb-3">Key Traits</h3>
+        <div class="flex flex-wrap gap-2">
+          <%= for trait <- @primary_type_desc.key_traits do %>
+            <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm">
+              <%= trait %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%!-- All Type Scores --%>
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">Your Type Scores</h3>
+      <div class="space-y-4">
+        <%= for {type_num, score} <- @sorted_scores do %>
+          <% type_num_int = if is_binary(type_num), do: String.to_integer(type_num), else: type_num %>
+          <div class="flex items-center">
+            <div class="w-48 flex-shrink-0">
+              <span class="text-sm font-medium text-gray-700">
+                <%= type_name(type_num_int) %>
+              </span>
+            </div>
+            <div class="flex-grow">
+              <div class="w-full bg-gray-200 rounded-full h-6 relative overflow-hidden">
+                <div class={"h-6 rounded-full transition-all duration-500 #{if type_num_int == @test.primary_type, do: "bg-indigo-600", else: "bg-gray-400"}"}
+                     style={"width: #{score}%"}>
+                  <span class="absolute right-2 top-0 text-white text-sm font-medium leading-6">
+                    <%= score %>%
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%!-- Share Section --%>
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+      <h3 class="text-xl font-bold text-gray-900 mb-4">Share Your Results</h3>
+      <div class="flex gap-2">
+        <input type="text"
+               readonly
+               value={@share_url}
+               class="flex-grow px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 text-sm"
+               id="share-url" />
+        <button phx-click="copy_link"
+                onclick="navigator.clipboard.writeText(document.getElementById('share-url').value)"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-2 rounded-lg transition-colors">
+          Copy Link
+        </button>
+      </div>
+      <p class="text-gray-500 text-sm mt-2">
+        Anyone with this link can view your results
+      </p>
+    </div>
+
+    <%!-- Take Again Button --%>
+    <div class="text-center">
+      <a href="/"
+         class="inline-block bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+        Take Test Again
+      </a>
+    </div>
+  </div>
+</div>
