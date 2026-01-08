@@ -3,8 +3,9 @@ defmodule EnneagramWebWeb.TestLive do
 
   alias EnneagramWeb.{Assessment, Scoring}
 
-  def mount(_params, _session, socket) do
-    {:ok, test} = Assessment.create_test()
+  def mount(_params, session, socket) do
+    current_user = Map.get(session, "current_user")
+    test = get_or_create_test(current_user)
     questions = Assessment.list_questions()
 
     {:ok,
@@ -16,7 +17,8 @@ defmodule EnneagramWebWeb.TestLive do
      |> assign(:confidence, 0)
      |> assign(:confidence_text, "Warming up...")
      |> assign(:top_types, [])
-     |> assign(:can_skip, false)}
+     |> assign(:can_skip, false)
+     |> assign(:current_user, current_user)}
   end
 
   def handle_event("answer", %{"answer" => value}, socket) do
@@ -31,7 +33,7 @@ defmodule EnneagramWebWeb.TestLive do
     )
 
     # Get all answers and recalculate scores
-    answers = Assessment.get_test_answers(socket.assigns.test.id)
+    answers = EnneagramWeb.Assessment.get_test!(socket.assigns.test.id).answers
     scores = Scoring.calculate_scores(answers)
     questions_answered = length(answers)
 
@@ -69,7 +71,7 @@ defmodule EnneagramWebWeb.TestLive do
   end
 
   def handle_event("skip_to_results", _params, socket) do
-    answers = Assessment.get_test_answers(socket.assigns.test.id)
+    answers = EnneagramWeb.Assessment.get_test!(socket.assigns.test.id).answers
     scores = Scoring.calculate_scores(answers)
     normalized_scores = Scoring.normalize_scores(scores)
     primary_type = Scoring.get_primary_type(scores)
@@ -85,6 +87,16 @@ defmodule EnneagramWebWeb.TestLive do
     )
 
     {:noreply, push_navigate(socket, to: ~p"/results/#{socket.assigns.test.id}")}
+  end
+
+  defp get_or_create_test(user) do
+    case Assessment.get_test_by_user(user) do
+      nil ->
+        {:ok, test} = Assessment.create_test(user)
+        test
+      test ->
+        test
+    end
   end
 
   defp initialize_scores do

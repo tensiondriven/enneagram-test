@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" class="[scrollbar-gutter:stable]">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title default="EnneagramWeb" suffix=" · Phoenix Framework">
+      {assigns[:page_title]}
+    </.live_title>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+  </head>
+  <body class="bg-white">
+    <header class="bg-blue-600 text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Enneagram Test</h1>
+        <div>
+          <%= if @current_user do %>
+            <span class="mr-4">Welcome, <%= @current_user %></span>
+            <button phx-click="logout" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded">
+              Logout
+            </button>
+          <% else %>
+            <span class="text-sm">Please select a user to continue</span>
+          <% end %>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <%= if @current_user do %>
+        <%= @inner_content %>
+      <% else %>
+        <div class="text-center py-16">
+          <h2 class="text-3xl font-bold mb-8">Select User</h2>
+          <div class="flex justify-center space-x-8">
+            <button phx-click="select_user" phx-value-user="Eli" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg text-xl">
+              Eli
+            </button>
+            <button phx-click="select_user" phx-value-user="Ace" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl">
+              Ace
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </main>
+  </body>
+</html>

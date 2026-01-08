@@ -8,15 +8,19 @@ defmodule EnneagramWeb.Assessment do
 
   def get_question!(id), do: Repo.get!(Question, id)
 
-  def create_test do
+  def create_test(user) do
     %Test{}
-    |> Test.changeset(%{started_at: DateTime.utc_now()})
+    |> Test.changeset(%{user: user, started_at: DateTime.utc_now()})
     |> Repo.insert()
   end
 
   def get_test!(id) do
     Repo.get!(Test, id)
     |> Repo.preload(answers: :question)
+  end
+
+  def get_test_by_user(user) do
+    Repo.get_by(Test, user: user, completed_at: nil)
   end
 
   def save_answer(test_id, question_id, answer_value) do
@@ -31,6 +35,15 @@ defmodule EnneagramWeb.Assessment do
       on_conflict: {:replace, [:answer_value, :answered_at]},
       conflict_target: [:test_id, :question_id]
     )
+    |> case do
+      {:ok, answer} ->
+        # Broadcast the update
+        test = get_test!(test_id)
+        EnneagramWeb.PubSub.broadcast_test_updated(test)
+        {:ok, answer}
+      {:error, changeset} ->
+        {:error, changeset}
+    end
   end
 
   def complete_test(test, scores, primary_type, confidence, confidence_progression) do
@@ -43,22 +56,22 @@ defmodule EnneagramWeb.Assessment do
       confidence_progression: confidence_progression
     })
     |> Repo.update()
+    |> case do
+      {:ok, completed_test} ->
+        # Broadcast the completion
+        EnneagramWeb.PubSub.broadcast_test_completed(completed_test)
+        {:ok, completed_test}
+      {:error, changeset} ->
+        {:error, changeset}
+    end
   end
 
-  def get_test_answers(test_id) do
+  def get_active_tests do
     Repo.all(
-      from a in Answer,
-      where: a.test_id == ^test_id,
-      preload: [:question],
-      order_by: [asc: a.answered_at]
+      from t in Test,
+      where: is_nil(t.completed_at),
+      order_by: [desc: t.started_at],
+      preload: [answers: :question]
     )
-  end
-
-  def seed_questions(questions) do
-    Enum.each(questions, fn question_attrs ->
-      %Question{}
-      |> Question.changeset(question_attrs)
-      |> Repo.insert!()
-    end)
   end
 end

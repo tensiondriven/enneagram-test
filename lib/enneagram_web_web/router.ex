@@ -5,7 +5,16 @@ defmodule EnneagramWebWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, html: {EnneagramWebWeb.Layouts, :root}
+    plug :put_root_layout, html: {EnneagramWebWeb.Layouts, :root}, layout: false
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  pipeline :auth do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, html: {EnneagramWebWeb.Layouts.Auth, :auth}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -20,6 +29,13 @@ defmodule EnneagramWebWeb.Router do
     live "/", HomeLive
     live "/test", TestLive
     live "/results/:id", ResultsLive
+    live "/monitor", MonitorLive
+  end
+
+  scope "/auth", EnneagramWebWeb do
+    pipe_through :auth
+
+    live "/", HomeLive
   end
 
   # Other scopes may use custom stacks.

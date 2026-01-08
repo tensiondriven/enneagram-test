@@ -3,7 +3,8 @@ defmodule EnneagramWebWeb.ResultsLive do
 
   alias EnneagramWeb.Assessment
 
-  def mount(%{"id" => test_id}, _session, socket) do
+  def mount(%{"id" => test_id}, session, socket) do
+    current_user = Map.get(session, "current_user")
     test = Assessment.get_test!(test_id)
 
     if is_nil(test.completed_at) do
@@ -21,7 +22,8 @@ defmodule EnneagramWebWeb.ResultsLive do
        |> assign(:test, test)
        |> assign(:primary_type_desc, primary_type_desc)
        |> assign(:sorted_scores, sorted_scores)
-       |> assign(:share_url, url(socket, ~p"/results/#{test_id}"))}
+       |> assign(:share_url, url(socket, ~p"/results/#{test_id}"))
+       |> assign(:current_user, current_user)}
     end
   end
 
@@ -85,7 +87,7 @@ defmodule EnneagramWebWeb.ResultsLive do
         description: "You are motivated by a desire to be satisfied and content. You are spontaneous, versatile, and optimistic, always seeking new experiences. At your best, you are joyous and focused.",
         core_fear: "Being deprived, trapped in pain, or limited",
         core_desire: "To be happy, satisfied, and fulfilled",
-        key_traits: ["Spontaneous", "Versatile", "Optimistic", "Excitable", "Adventurous", "Multi-talented"]
+        key_traits: ["Spontaneous", "Versatile", "Optimistic", "Excible", "Adventurous", "Multi-talented"]
       },
       8 => %{
         name: "The Challenger",

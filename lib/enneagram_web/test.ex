@@ -6,6 +6,7 @@ defmodule EnneagramWeb.Test do
   @foreign_key_type :binary_id
 
   schema "tests" do
+    field :user, :string
     field :started_at, :utc_datetime
     field :completed_at, :utc_datetime
     field :primary_type, :integer
@@ -20,8 +21,8 @@ defmodule EnneagramWeb.Test do
 
   def changeset(test, attrs) do
     test
-    |> cast(attrs, [:started_at, :completed_at, :primary_type, :confidence, :scores, :confidence_progression])
-    |> validate_required([:started_at])
+    |> cast(attrs, [:user, :started_at, :completed_at, :primary_type, :confidence, :scores, :confidence_progression])
+    |> validate_required([:user, :started_at])
   end
 
   def complete_changeset(test, attrs) do
